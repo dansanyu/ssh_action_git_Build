@@ -11,8 +11,8 @@ cd $PROJECT_DIR
 docker compose down || true
 
 # 替换二进制
-mv app app.old 2>/dev/null || true
-mv app.new app 2>/dev/null || true
+mv app app_old 2>/dev/null || true
+mv app_new app 2>/dev/null || true
 
 # 构建并启动容器
 docker compose build

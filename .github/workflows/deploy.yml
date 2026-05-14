@@ -23,7 +23,7 @@ jobs:
       # 3️⃣ 编译 Go 二进制
       - name: Build Go binary
         run: |
-          GOOS=linux GOARCH=amd64 go build -o app
+          GOOS=linux GOARCH=amd64 go build -o app_new
 
       # 4️⃣ 确保远程目标目录存在
       - name: Ensure target directory exists
@@ -33,7 +33,7 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
-            mkdir -p ${{ env.WORK_DIR }}
+            mkdir -p /home/gosrc/gitbuild
 
       # 4️⃣ 上传二进制到 VPS
       - name: Copy binary to server
@@ -42,8 +42,8 @@ jobs:
           host: ${{ secrets.SERVER_HOST }}
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SERVER_SSH_KEY }}
-          source: "app"
-          target: "${{ secrets.WORK_DIR }}/app.new"
+          source: "app_new"
+          target: "${{ secrets.WORK_DIR }}/"
 
       # 5️⃣ 上传 ssl 文件夹到 VPS
       - name: Copy deploy.sh to server
