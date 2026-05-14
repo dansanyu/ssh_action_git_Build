@@ -1,8 +1,11 @@
 编译的两种方式：
+
 1是在自己的服务器docker中编译（自己服务器编译要设置好限制，不要爆内存）：https://github.com/dansanyu/testwebhook
+
 2是在github服务器上编译：https://github.com/dansanyu/ssh_action_git_Build
 
 都差不多，这里说第二种，在github服务器上编译
+
 项目中的必须要的文件如下：
 
       myproject/
@@ -14,10 +17,15 @@
       └─ deploy.sh
       
 - .github 是隐藏目录，存放 GitHub 配置
+- 
 - workflows 目录专门存放 Actions workflow 文件
+- 
 - 文件可以命名为任意名字，但必须以 .yml 或 .yaml 结尾
+- 
 每次push github 会按照deploy.yml中的代码执行
+
 deploy.yml示例代码
+
 name: Build online
 
 on:
