@@ -4,6 +4,7 @@
 
 都差不多，这里说第二种，在github服务器上编译
 项目中的必须要的文件如下：
+
       myproject/
       ├─ .github/
       │   └─ workflows/
@@ -11,6 +12,7 @@
       ├─ Dockerfile
       ├─ docker-compose.yml
       └─ deploy.sh
+      
 - .github 是隐藏目录，存放 GitHub 配置
 - workflows 目录专门存放 Actions workflow 文件
 - 文件可以命名为任意名字，但必须以 .yml 或 .yaml 结尾
