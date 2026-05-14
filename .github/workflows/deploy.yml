@@ -3,7 +3,7 @@ name: Deploy Go App online
 on:
   push:
     branches:
-      - main  # 每次 push main 自动触发
+      - master  # 每次 push master 自动触发
 
 jobs:
   build-and-deploy:
