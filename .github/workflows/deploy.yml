@@ -75,4 +75,5 @@ jobs:
           key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
             cd /home/gosrc/gitbuild
+            chmod +x /home/user/project/deploy.sh
             bash deploy.sh
