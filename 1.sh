@@ -1,28 +1,19 @@
 #!/bin/bash
 set -e
 
-PROJECT_DIR="/www/wwwroot/v2.dokey.cf/action"
-REPO="git@github.com:dansanyu/testwebhook.git"
-BRANCH="master"   # ⚠️ 如果你 GitHub 是 main，这里要改 main
+PROJECT_DIR="/home/gosrc/gitbuild"
 
+# 创建项目目录
 mkdir -p $PROJECT_DIR
 cd $PROJECT_DIR
 
-# 如果第一次部署
-if [ ! -d ".git" ]; then
-    git init
-    git remote add origin $REPO
-fi
-
-# 强制同步远程分支
-git fetch origin
-
-# 删除所有本地状态，直接对齐远程
-git checkout -B $BRANCH origin/$BRANCH
-
-# 清理脏文件
-git clean -fd
-
-# Docker
+# 停掉旧容器 停掉当前目录下 docker-compose.yml 定义的所有服务
 docker compose down || true
+
+# 替换二进制
+mv app app.old 2>/dev/null || true
+mv app.new app 2>/dev/null || true
+
+# 构建并启动容器
+docker compose build
 docker compose up -d --build
