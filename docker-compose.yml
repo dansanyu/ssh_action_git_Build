@@ -3,7 +3,7 @@ version: "3.9"
 services:
   app:
     image: alpine:latest
-    container_name: gobuild
+    container_name: gogo
     working_dir: /app
     command: ["./app"]               # 启动挂载的二进制
     ports:
