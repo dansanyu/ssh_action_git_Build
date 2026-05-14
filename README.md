@@ -169,7 +169,9 @@ b.如果 deploy.sh 没有 chmod +x 或 set -e，出错不会停止
             cd /home/gosrc/gitbuild
             chmod +x ./deploy.sh
             bash deploy.sh
+  
 deploy.sh示例代码:
+
           #!/bin/bash
           set -e
           
@@ -191,6 +193,7 @@ deploy.sh示例代码:
           docker compose up -d --build
 
 docker-compose.yml示例代码:
+
           version: "3.9"
           
           services:
@@ -205,7 +208,10 @@ docker-compose.yml示例代码:
                 - ./app:/app/app               # 挂载二进制文件
                 - ./ssl:/app/ssl               # 挂载 ssl 文件夹
               restart: always
+
+              
 Dockerfile示例代码:
+
               # 运行镜像只需要二进制
               FROM alpine:latest
               WORKDIR /app
