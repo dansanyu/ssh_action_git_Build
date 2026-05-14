@@ -23,7 +23,7 @@ jobs:
       # 3️⃣ 编译 Go 二进制
       - name: Build Go binary
         run: |
-          GOOS=linux GOARCH=amd64 go build -o app_new
+          GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build -o app_new
 
       # 4️⃣ 确保远程目标目录存在
       - name: Ensure target directory exists

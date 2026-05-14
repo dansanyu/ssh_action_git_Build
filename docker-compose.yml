@@ -2,12 +2,13 @@ version: "3.9"
 
 services:
   app:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: alpine:latest
     container_name: gobuild
+    working_dir: /app
+    command: ["./app"]               # 启动挂载的二进制
     ports:
       - "8081:8081"
     volumes:
-      - ./ssl:/app/ssl
+      - ./app:/app/app               # 挂载二进制文件
+      - ./ssl:/app/ssl               # 挂载 ssl 文件夹
     restart: always
