@@ -25,6 +25,16 @@ jobs:
         run: |
           GOOS=linux GOARCH=amd64 go build -o app
 
+      # 4️⃣ 确保远程目标目录存在
+      - name: Ensure target directory exists
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          script: |
+            mkdir -p ${{ env.WORK_DIR }}
+
       # 4️⃣ 上传二进制到 VPS
       - name: Copy binary to server
         uses: appleboy/scp-action@master
@@ -43,7 +53,7 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SERVER_SSH_KEY }}
           source: "deploy.sh"
-          target: "${{ secrets.WORK_DIR }}/deploy.sh"
+          target: "${{ secrets.WORK_DIR }}/"
 
       # 5️⃣ 上传 ssl 文件夹到 VPS
       - name: Copy ssl folder to server
@@ -53,7 +63,7 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SERVER_SSH_KEY }}
           source: "ssl"
-          target: "${{ secrets.WORK_DIR }}/ssl"
+          target: "${{ secrets.WORK_DIR }}/"
           recursive: true   # 递归上传整个目录
 
       # 5️⃣ 在 VPS 上执行 deploy.sh
